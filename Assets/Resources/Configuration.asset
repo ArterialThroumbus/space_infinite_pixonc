@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15db793fa0ba4b41bf5602684a9899b, type: 3}
+  m_Name: Configuration
+  m_EditorClassIdentifier: 
+  objectName: Configuration
+  MinScale: 5
+  MaxScale: 10000
+  SpecialViewScale: 10
+  CountPlanetInSpecialView: 20
+  MinRank: 0
+  MaxRank: 10000
+  RationOfPlanets: 0.3
