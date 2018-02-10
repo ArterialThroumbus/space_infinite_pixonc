@@ -3,39 +3,28 @@
 namespace Assets.Scripts.Models
 {
     public class SimpleShip : BaseShip {
-        private ReactiveProperty<MoveDirection> _moveDirection;
-        private ReactiveProperty<float> _speed = new ReactiveProperty<float>(0);
 
-        public override ReactiveProperty<float> Speed {
-            get { return _speed; }
-            set { }
-        }
-
-        public override ReactiveProperty<MoveDirection> Direction
+        public SimpleShip()
         {
-            get
-            {
-                return _moveDirection;
-            }
+            this.Direction = new ReactiveProperty<MoveDirection>(MoveDirection.None);
+            this.Position = new ReactiveProperty<Coordinate>();
+            this.Speed = new ReactiveProperty<float>(0);
 
-            set
-            {
-                _moveDirection = value;
-                CalculateCoordinates();
-            }
+            this.Direction.Subscribe(_ => CalculateCoordinates());
         }
 
         private void CalculateCoordinates()
         {
             var newCoordinates = new Coordinate();
 
-            if ((_moveDirection.Value & MoveDirection.Right) == MoveDirection.Right)
+            if ((Direction.Value & MoveDirection.Right) == MoveDirection.Right)
                 newCoordinates.X = 1;
-            else if ((_moveDirection.Value & MoveDirection.Up) == MoveDirection.Up)
-                newCoordinates.Y = 1;
-            else if ((_moveDirection.Value & MoveDirection.Left) == MoveDirection.Left)
+            else if ((Direction.Value & MoveDirection.Left) == MoveDirection.Left)
                 newCoordinates.X = -1;
-            else if ((_moveDirection.Value & MoveDirection.Down) == MoveDirection.Down)
+
+            if ((Direction.Value & MoveDirection.Up) == MoveDirection.Up)
+                newCoordinates.Y = 1;
+            else if ((Direction.Value & MoveDirection.Down) == MoveDirection.Down)
                 newCoordinates.Y = -1;
 
             Position.Value += newCoordinates;

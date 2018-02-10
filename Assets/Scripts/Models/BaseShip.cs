@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.Models.Interfaces;
-using UniRx;
+﻿using UniRx;
 
 namespace Assets.Scripts.Models
 {
-    public abstract class BaseShip : IMovableObject
+    public abstract class BaseShip : IShipModel
     {
         public ReactiveProperty<Coordinate> Position { get; set; }
 

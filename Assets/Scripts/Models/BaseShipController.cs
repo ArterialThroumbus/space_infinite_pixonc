@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Zenject;
 
 namespace Assets.Scripts.Models
 {
-    public abstract class BaseShipController : IDisposable
+    public abstract class BaseShipController : IDisposable, IInitializable
     {
         [Inject]
-        protected BaseShip _ship;
+        protected IShipModel _ship;
 
         public abstract void Dispose();
+
+        public abstract void Initialize();
     }
 }

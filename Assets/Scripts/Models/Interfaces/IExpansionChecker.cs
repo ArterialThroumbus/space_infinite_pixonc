@@ -4,7 +4,7 @@ namespace Assets.Scripts.Models.Interfaces
 {
     public interface IExpansionChecker
     {
-        event Action<SpaceChanging> Changing;
+        event Action<SpaceChanging, MoveDirection> Changing;
         void Check();
     }
 }
