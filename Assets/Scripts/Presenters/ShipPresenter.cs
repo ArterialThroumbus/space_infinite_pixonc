@@ -19,6 +19,10 @@ namespace Assets.Scripts.Presenters
         public void Initialize()
         {
             _model.Position.Subscribe(pos => _view.MoveTo(_coordinateConverter.Convert(pos)));
+
+            Observable.EveryUpdate()
+                .Where(_ => UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.Escape))
+                .Subscribe(_ => { UnityEngine.Application.Quit(); });
         }
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace Assets.Scripts.Models.Interfaces
+﻿using UniRx;
+using System;
+
+namespace Assets.Scripts.Models.Interfaces
 {
-    public interface ISpecialView
+    public interface ISpecialView : IVisibleFilter
     {
-        void Apply();
-        void Cancel();
+        ReactiveProperty<bool> IsEnabled { get; }
     }
 }

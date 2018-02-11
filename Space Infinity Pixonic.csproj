@@ -107,6 +107,9 @@
     <Compile Include="Assets\Scripts\Models\Interfaces\ISpecialView.cs" />
     <Compile Include="Assets\Scripts\Models\Interfaces\ISpecialViewChecker.cs" />
     <Compile Include="Assets\Scripts\Models\Interfaces\IStaticObject.cs" />
+    <Compile Include="Assets\Scripts\Models\Interfaces\IVisibleFilter.cs" />
+    <Compile Include="Assets\Scripts\Models\SimpleExpansionStrategy.cs" />
+    <Compile Include="Assets\Scripts\Models\SimpleMap.cs" />
     <Compile Include="Assets\Scripts\Models\IShipModel.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleCameraFollowingModel.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleExpansionChecker.cs" />
@@ -115,19 +118,24 @@
     <Compile Include="Assets\Scripts\Models\SimpleShip.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleShipController.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleSpace.cs" />
-    <Compile Include="Assets\Scripts\Models\SimpleSpacePart.cs" />
+    <Compile Include="Assets\Scripts\Models\SimpleSpecialView.cs" />
     <Compile Include="Assets\Scripts\Models\SpaceInfo.cs" />
+    <Compile Include="Assets\Scripts\Models\SimpleSpecialViewChecker.cs" />
     <Compile Include="Assets\Scripts\Presenters\CameraFollowingPresenter.cs" />
     <Compile Include="Assets\Scripts\Presenters\ScalingPresenter.cs" />
     <Compile Include="Assets\Scripts\Presenters\ShipPresenter.cs" />
+    <Compile Include="Assets\Scripts\Presenters\SpacePresenter.cs" />
     <Compile Include="Assets\Scripts\Views\Interfaces\ICameraFollowing.cs" />
     <Compile Include="Assets\Scripts\Views\Interfaces\ICoordinateConverter.cs" />
     <Compile Include="Assets\Scripts\Views\Interfaces\IScaleManipulationView.cs" />
     <Compile Include="Assets\Scripts\Views\Interfaces\IShip.cs" />
+    <Compile Include="Assets\Scripts\Views\Interfaces\ISpaceView.cs" />
     <Compile Include="Assets\Scripts\Views\SimpleCoordinateConverter.cs" />
     <Compile Include="Assets\Scripts\Views\SimpleScaleManipulationView.cs" />
+    <Compile Include="Assets\Scripts\Views\VPlanet.cs" />
     <Compile Include="Assets\Scripts\Views\VShip.cs" />
     <Compile Include="Assets\Scripts\Views\VSimpleCameraFollowing.cs" />
+    <Compile Include="Assets\Scripts\Views\VSpaceView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\UniRx\ReadMe.txt" />

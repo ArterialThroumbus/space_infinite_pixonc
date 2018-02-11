@@ -4,6 +4,6 @@ namespace Assets.Scripts.Models.Interfaces
 {
     public interface IMap
     {
-        IEnumerable<IStaticObject> Generate();
+        IEnumerable<IStaticObject> Generate(int width, int height);
     }
 }

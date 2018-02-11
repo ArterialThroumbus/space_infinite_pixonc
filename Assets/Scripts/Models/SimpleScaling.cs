@@ -10,9 +10,10 @@ namespace Assets.Scripts.Models
     {
         [Inject]
         private SpaceInfo _spaceInfo;
-
         [Inject]
         private Configuration _configuration;
+        [Inject]
+        private IExpansionChecker _expansionChecker;
 
         private readonly int DeltaChange = 5;
         private readonly string Scaling = "Scaling";
@@ -41,12 +42,14 @@ namespace Assets.Scripts.Models
                 if (scaling > 0)
                 {
                     _spaceInfo.CurrentScale = Math.Min(_spaceInfo.CurrentScale + DeltaChange, _configuration.MaxScale);
+                    _expansionChecker.Check();
                     if (_changed != null)
                         _changed(_spaceInfo.CurrentScale);
                 }
                 else if (scaling < 0)
                 {
                     _spaceInfo.CurrentScale = Math.Max(_spaceInfo.CurrentScale - DeltaChange, _configuration.MinScale);
+                    _expansionChecker.Check();
                     if (_changed != null)
                         _changed(_spaceInfo.CurrentScale);
                 }

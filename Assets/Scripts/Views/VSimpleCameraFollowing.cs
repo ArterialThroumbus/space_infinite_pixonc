@@ -1,9 +1,6 @@
-﻿using Assets.Scripts.Models.Interfaces;
-using Assets.Scripts.Views.Interfaces;
+﻿using Assets.Scripts.Views.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
 using UniRx;
 using Zenject;
@@ -12,7 +9,7 @@ namespace Assets.Scripts.Views
 {
     public class VSimpleCameraFollowing : ICameraFollowing, IInitializable
     {
-        private const float FollowingTime = 2.0f;
+        private const float FollowingTime = 1.0f;
         private Transform _cameraTransform;
         private IDisposable _currentMoving;
         

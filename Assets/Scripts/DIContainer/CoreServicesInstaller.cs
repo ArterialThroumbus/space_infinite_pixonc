@@ -5,6 +5,7 @@ using Assets.Scripts.Views.Interfaces;
 using Zenject;
 using UnityEngine;
 using Assets.Scripts;
+using System;
 
 public class CoreServicesInstaller : MonoInstaller {
 
@@ -37,6 +38,21 @@ public class CoreServicesInstaller : MonoInstaller {
         Container.BindInterfacesTo<ScalingPresenter>().AsSingle().NonLazy();
 
         //space
+        Container.Bind<int>().FromInstance(Guid.NewGuid().GetHashCode());
+        Container.BindInterfacesTo<SimpleSpecialViewChecker>().AsSingle();
+        Container.BindInterfacesTo<SimpleSpecialView>().AsSingle();
+        Container.BindInterfacesTo<SimpleMap>().AsSingle();
+        Container.BindInterfacesTo<SimpleSpace>().AsSingle();
+        Container.BindInterfacesTo<SimpleExpansionChecker>().AsSingle().NonLazy();
+        Container.BindInterfacesTo<SimpleExpansionStrategy>().AsSingle().NonLazy();
+        
+        Container.BindInterfacesTo<VSpaceView>().AsSingle();
+        Container.BindMemoryPool<VPlanet, VPlanet.Pool>()
+            .WithInitialSize(_configuration.CountPlanetInSpecialView)
+            .FromComponentInNewPrefabResource("Prefabs/VPlanet").
+            UnderTransformGroup("Game");
+
+        Container.BindInterfacesTo<SpacePresenter>().AsSingle().NonLazy();
     }
 
     private SpaceInfo TempSpaceInfo(InjectContext context)

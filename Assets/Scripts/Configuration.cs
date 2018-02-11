@@ -13,6 +13,8 @@ namespace Assets.Scripts
 
         public int MinRank = 0;
         public int MaxRank = 10000;
-        public float RationOfPlanets = 0.3f; 
+        public float RationOfPlanets = 0.3f;
+        public int HiddenSpace = 5;
+        public int PlanetsType = 9;
     }
 }

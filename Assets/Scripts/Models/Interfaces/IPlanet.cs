@@ -2,5 +2,6 @@
 {
     public interface IPlanet : IStaticObject, IRank
     {
+        int PlanetType { get; set; }
     }
 }

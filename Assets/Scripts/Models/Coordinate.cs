@@ -26,5 +26,11 @@
 
             return first;
         }
+
+        public override int GetHashCode()
+        {
+            string hash = X.ToString() + ":" + Y.ToString();
+            return hash.GetHashCode();
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace Assets.Scripts.Models
 
     public enum SpaceChanging
     {
+        None,
         Expansion,
         Narrowing
     }
