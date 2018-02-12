@@ -26,11 +26,13 @@ namespace Assets.Scripts.Models
 
         public ReactiveProperty<bool> IsEnabled { get; private set; }
         private IDictionary<int, List<IPlanet>> _planetByRankDifferent;
+        private List<IPlanet> _showingPlanets;
 
         public SimpleSpecialView()
         {
             IsEnabled = new ReactiveProperty<bool>(false);
             _planetByRankDifferent = new SortedList<int, List<IPlanet>>();
+            _showingPlanets = new List<IPlanet>();
         }
 
         public void Initialize()
@@ -85,25 +87,26 @@ namespace Assets.Scripts.Models
 
         private void ShowPlanets()
         {
+            _showingPlanets.ForEach(planet => planet.IsVisible.Value = false);
+            _showingPlanets.Clear();
+
             if (IsEnabled.Value)
             {
-                var maxShowing = _configuration.CountPlanetInSpecialView;
-
                 foreach (var diffToPlanets in _planetByRankDifferent)
                 {
                     foreach(var planet in diffToPlanets.Value)
                     {
                         if (IsInView(planet.Position))
                         {
-                            maxShowing -= 1;
+                            _showingPlanets.Add(planet);
                             planet.IsVisible.Value = true;
 
-                            if (maxShowing == 0)
+                            if (_showingPlanets.Count == _configuration.CountPlanetInSpecialView)
                                 break;
                         }
                     }
 
-                    if (maxShowing == 0)
+                    if (_showingPlanets.Count == _configuration.CountPlanetInSpecialView)
                         break;
                 }
             }
@@ -117,6 +120,7 @@ namespace Assets.Scripts.Models
 
                         if (_space.Planets.ContainsKey(uid))
                         {
+                            _showingPlanets.Add(_space.Planets[uid]);
                             _space.Planets[uid].IsVisible.Value = true;
                         }
                     }
