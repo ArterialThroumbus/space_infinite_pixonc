@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Models.Interfaces;
+using System;
 using Zenject;
 
 namespace Assets.Scripts.Models
@@ -7,6 +8,8 @@ namespace Assets.Scripts.Models
     {
         [Inject]
         protected IShipModel _ship;
+        [Inject(Id = "input_manager")]
+        protected IInputSubscriber _input;
 
         public abstract void Dispose();
 

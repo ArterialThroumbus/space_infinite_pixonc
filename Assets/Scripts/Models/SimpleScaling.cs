@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.Models.Interfaces;
 using System;
-using UnityEngine;
 using Zenject;
 using UniRx;
 
@@ -14,9 +13,10 @@ namespace Assets.Scripts.Models
         private Configuration _configuration;
         [Inject]
         private IExpansionChecker _expansionChecker;
+        [Inject(Id = "input_manager")]
+        private IInputSubscriber _input;
 
         private readonly int DeltaChange = 5;
-        private readonly string Scaling = "Scaling";
         private Action<int> _changed = (scale) => { };
 
         public Action<int> Changed
@@ -36,23 +36,19 @@ namespace Assets.Scripts.Models
         {
             _spaceInfo.CurrentScale = _configuration.MinScale;
 
-            Observable.EveryUpdate().Where(_ => Input.anyKeyDown).Subscribe(_ => {
-                var scaling = Input.GetAxis(Scaling);
+            _input.ScaleUpFire().Subscribe(_ => {
+                _spaceInfo.CurrentScale = Math.Min(_spaceInfo.CurrentScale + DeltaChange, _configuration.MaxScale);
+                _expansionChecker.Check();
+                if (_changed != null)
+                    _changed(_spaceInfo.CurrentScale);
+            });
 
-                if (scaling > 0)
-                {
-                    _spaceInfo.CurrentScale = Math.Min(_spaceInfo.CurrentScale + DeltaChange, _configuration.MaxScale);
-                    _expansionChecker.Check();
-                    if (_changed != null)
-                        _changed(_spaceInfo.CurrentScale);
-                }
-                else if (scaling < 0)
-                {
-                    _spaceInfo.CurrentScale = Math.Max(_spaceInfo.CurrentScale - DeltaChange, _configuration.MinScale);
-                    _expansionChecker.Check();
-                    if (_changed != null)
-                        _changed(_spaceInfo.CurrentScale);
-                }
+            _input.ScaleDownFire().Subscribe(_ =>
+            {
+                _spaceInfo.CurrentScale = Math.Max(_spaceInfo.CurrentScale - DeltaChange, _configuration.MinScale);
+                _expansionChecker.Check();
+                if (_changed != null)
+                    _changed(_spaceInfo.CurrentScale);
             });
         }
     }

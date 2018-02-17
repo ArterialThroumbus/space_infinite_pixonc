@@ -21,10 +21,6 @@ namespace Assets.Scripts.Models
 
         public IEnumerable<IStaticObject> Generate(int width, int height)
         {
-            if (width < 0 || height < 0)
-            {
-                UnityEngine.Debug.Log("WTF!!");
-            }
             var result = new IStaticObject[width * height];
             var planetRation = _configuration.RationOfPlanets;
 

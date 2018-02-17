@@ -6,6 +6,7 @@ using Zenject;
 using UnityEngine;
 using Assets.Scripts;
 using System;
+using Assets.Scripts.Models.Interfaces;
 
 public class CoreServicesInstaller : MonoInstaller {
 
@@ -18,6 +19,9 @@ public class CoreServicesInstaller : MonoInstaller {
         Container.Bind<Configuration>().FromInstance(_configuration).AsSingle();
         Container.BindInterfacesTo<SimpleCoordinateConverter>().AsSingle().NonLazy();
         Container.Bind<SpaceInfo>().FromMethod(TempSpaceInfo).AsSingle();
+        Container.BindInterfacesTo<UnityInputSystem>().AsSingle().WhenInjectedInto<SimpleInputManager>();
+        Container.BindInterfacesTo<CustomInputSystem>().AsSingle().WhenInjectedInto<SimpleInputManager>();
+        Container.Bind<IInputSubscriber>().WithId("input_manager").To<SimpleInputManager>().AsSingle();
 
         //Ship
         Container.BindInterfacesTo<SimpleShip>().AsSingle();

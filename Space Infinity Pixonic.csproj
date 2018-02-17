@@ -94,8 +94,12 @@
     <Compile Include="Assets\Scripts\Models\BaseShip.cs" />
     <Compile Include="Assets\Scripts\Models\BaseShipController.cs" />
     <Compile Include="Assets\Scripts\Models\Coordinate.cs" />
+    <Compile Include="Assets\Scripts\Models\CustomInputSystem.cs" />
     <Compile Include="Assets\Scripts\Models\Enums.cs" />
     <Compile Include="Assets\Scripts\Models\Interfaces\ICameraFollowingModel.cs" />
+    <Compile Include="Assets\Scripts\Models\Interfaces\IInputCaller.cs" />
+    <Compile Include="Assets\Scripts\Models\Interfaces\IInputSubscriber.cs" />
+    <Compile Include="Assets\Scripts\Models\Interfaces\IInputManager.cs" />
     <Compile Include="Assets\Scripts\Models\Interfaces\IExpansionChecker.cs" />
     <Compile Include="Assets\Scripts\Models\Interfaces\IExpansionStrategy.cs" />
     <Compile Include="Assets\Scripts\Models\Interfaces\IMap.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="Assets\Scripts\Models\Interfaces\IStaticObject.cs" />
     <Compile Include="Assets\Scripts\Models\Interfaces\IVisibleFilter.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleExpansionStrategy.cs" />
+    <Compile Include="Assets\Scripts\Models\SimpleInputManager.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleMap.cs" />
     <Compile Include="Assets\Scripts\Models\IShipModel.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleCameraFollowingModel.cs" />
@@ -121,7 +126,9 @@
     <Compile Include="Assets\Scripts\Models\SimpleSpecialView.cs" />
     <Compile Include="Assets\Scripts\Models\SpaceInfo.cs" />
     <Compile Include="Assets\Scripts\Models\SimpleSpecialViewChecker.cs" />
+    <Compile Include="Assets\Scripts\Models\UnityInputSystem.cs" />
     <Compile Include="Assets\Scripts\Presenters\CameraFollowingPresenter.cs" />
+    <Compile Include="Assets\Scripts\Presenters\GamePresenter.cs" />
     <Compile Include="Assets\Scripts\Presenters\ScalingPresenter.cs" />
     <Compile Include="Assets\Scripts\Presenters\ShipPresenter.cs" />
     <Compile Include="Assets\Scripts\Presenters\SpacePresenter.cs" />
