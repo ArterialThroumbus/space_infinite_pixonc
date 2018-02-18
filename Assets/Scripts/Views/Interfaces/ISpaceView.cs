@@ -8,6 +8,5 @@ namespace Assets.Scripts.Views.Interfaces
         void HidePlanet(IPlanet planet);
         void ShowPlanet(IPlanet planet);
         void HideAll();
-        void SpecialView(bool isEnable);
     }
 }

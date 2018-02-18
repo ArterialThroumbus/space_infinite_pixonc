@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UniRx;
+using Assets.Scripts.Signals;
 
 namespace Assets.Scripts.Models
 {
     public class SimpleSpecialView : ISpecialView, IInitializable
     {
+        [Inject]
+        private SpecialViewChanged _specialSignal;
         [Inject]
         private IShipModel _ship;
         [Inject]
@@ -24,13 +27,13 @@ namespace Assets.Scripts.Models
         [Inject]
         private ICameraFollowingModel _cameraFollowing;
 
-        public ReactiveProperty<bool> IsEnabled { get; private set; }
+        public SpecialViewChanged Changed { get { return _specialSignal; } }
         private IDictionary<int, List<IPlanet>> _planetByRankDifferent;
         private List<IPlanet> _showingPlanets;
+        private bool _isEnabled;
 
         public SimpleSpecialView()
         {
-            IsEnabled = new ReactiveProperty<bool>(false);
             _planetByRankDifferent = new SortedList<int, List<IPlanet>>();
             _showingPlanets = new List<IPlanet>();
         }
@@ -44,7 +47,8 @@ namespace Assets.Scripts.Models
 
         private void SpecialChanging(bool isEnabled)
         {
-            IsEnabled.Value = isEnabled;
+            _isEnabled = isEnabled;
+            _specialSignal.Fire(_isEnabled, _spaceInfo.CurrentScale);
             ShowPlanets();
         }
 
@@ -64,7 +68,7 @@ namespace Assets.Scripts.Models
             {
                 CachedPlanet(planet);
 
-                if (!IsEnabled.Value)
+                if (!_isEnabled)
                 {
                     planet.IsVisible.Value = true;
                     continue;
@@ -90,7 +94,7 @@ namespace Assets.Scripts.Models
             _showingPlanets.ForEach(planet => planet.IsVisible.Value = false);
             _showingPlanets.Clear();
 
-            if (IsEnabled.Value)
+            if (_isEnabled)
             {
                 foreach (var diffToPlanets in _planetByRankDifferent)
                 {

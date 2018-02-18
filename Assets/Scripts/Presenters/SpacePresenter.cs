@@ -21,8 +21,6 @@ namespace Assets.Scripts.Presenters
 
             foreach (var planet in _space.Planets.Values)
                 _spaceView.AddPlanet(planet);
-
-            _specialView.IsEnabled.Subscribe(isEnabled => _spaceView.SpecialView(isEnabled));
         }
     }
 }

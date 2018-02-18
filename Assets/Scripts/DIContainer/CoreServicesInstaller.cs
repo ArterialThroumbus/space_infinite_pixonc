@@ -7,6 +7,7 @@ using UnityEngine;
 using Assets.Scripts;
 using System;
 using Assets.Scripts.Models.Interfaces;
+using Assets.Scripts.Signals;
 
 public class CoreServicesInstaller : MonoInstaller {
 
@@ -15,13 +16,19 @@ public class CoreServicesInstaller : MonoInstaller {
 
     public override void InstallBindings()
     {
+        //signals
+        Container.DeclareSignal<SpecialViewChanged>();
+
         //utilites
         Container.Bind<Configuration>().FromInstance(_configuration).AsSingle();
         Container.BindInterfacesTo<SimpleCoordinateConverter>().AsSingle().NonLazy();
         Container.Bind<SpaceInfo>().FromMethod(TempSpaceInfo).AsSingle();
-        Container.BindInterfacesTo<UnityInputSystem>().AsSingle().WhenInjectedInto<SimpleInputManager>();
-        Container.BindInterfacesTo<CustomInputSystem>().AsSingle().WhenInjectedInto<SimpleInputManager>();
+        
+        //Input
+        Container.BindInterfacesTo<UnityInputSystem>().AsSingle();
+        Container.BindInterfacesTo<CustomInputSystem>().AsSingle();
         Container.Bind<IInputSubscriber>().WithId("input_manager").To<SimpleInputManager>().AsSingle();
+        Container.BindInterfacesTo<CustomInputPresenter>().AsSingle();
 
         //Ship
         Container.BindInterfacesTo<SimpleShip>().AsSingle();
@@ -49,7 +56,6 @@ public class CoreServicesInstaller : MonoInstaller {
         Container.BindInterfacesTo<SimpleSpace>().AsSingle();
         Container.BindInterfacesTo<SimpleExpansionChecker>().AsSingle().NonLazy();
         Container.BindInterfacesTo<SimpleExpansionStrategy>().AsSingle().NonLazy();
-        
         Container.BindInterfacesTo<VSpaceView>().AsSingle();
         Container.BindMemoryPool<VPlanet, VPlanet.Pool>()
             .WithInitialSize(_configuration.CountPlanetInSpecialView)
@@ -57,6 +63,9 @@ public class CoreServicesInstaller : MonoInstaller {
             UnderTransformGroup("Game");
 
         Container.BindInterfacesTo<SpacePresenter>().AsSingle().NonLazy();
+
+        //special view
+        Container.BindInterfacesTo<SpecialViewPresenter>().AsSingle();
     }
 
     private SpaceInfo TempSpaceInfo(InjectContext context)

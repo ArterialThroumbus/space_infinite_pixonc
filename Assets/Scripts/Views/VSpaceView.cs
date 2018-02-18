@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using Zenject;
 using UniRx;
 using System.Linq;
+using Assets.Scripts.Views.UnityViews;
 
 namespace Assets.Scripts.Views
 {
-    public class VSpaceView : ISpaceView
+    public class VSpaceView : ISpaceView, ISpecialViewComponent
     {
         [Inject]
         private ICoordinateConverter _coordinateConverter;
@@ -46,9 +47,12 @@ namespace Assets.Scripts.Views
             }
         }
 
-        public void SpecialView(bool isEnable)
+        public void SpecialView(bool isEnable, int scale)
         {
-            
+            foreach (var planet in _currentPlanets.Values.Select(pl => pl.GetComponent<SpecialViewShowing>()))
+            {
+                planet.SpecialViewUpdate(isEnable, scale);
+            }
         }
 
         public void ShowPlanet(IPlanet planet)

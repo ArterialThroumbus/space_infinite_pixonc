@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.Models.Interfaces;
-using System;
 using System.Linq;
 using System.Collections.Generic;
 using UniRx;
@@ -27,32 +26,32 @@ namespace Assets.Scripts.Models
 
         public IObservable<Unit> ExitFire()
         {
-            return Observable.Concat(_inputs.Select(input => input.ExitFire()));
+            return Observable.Merge(_inputs.Select(input => input.ExitFire()));
         }
 
         public IObservable<Unit> LeftFire()
         {
-            return Observable.Concat(_inputs.Select(input => input.LeftFire()));
+            return Observable.Merge(_inputs.Select(input => input.LeftFire()));
         }
 
         public IObservable<Unit> RightFire()
         {
-            return Observable.Concat(_inputs.Select(input => input.RightFire()));
+            return Observable.Merge(_inputs.Select(input => input.RightFire()));
         }
 
         public IObservable<Unit> ScaleDownFire()
         {
-            return Observable.Concat(_inputs.Select(input => input.ScaleDownFire()));
+            return Observable.Merge(_inputs.Select(input => input.ScaleDownFire()));
         }
 
         public IObservable<Unit> ScaleUpFire()
         {
-            return Observable.Concat(_inputs.Select(input => input.ScaleUpFire()));
+            return Observable.Merge(_inputs.Select(input => input.ScaleUpFire()));
         }
 
         public IObservable<Unit> UpFire()
         {
-            return Observable.Concat(_inputs.Select(input => input.UpFire()));
+            return Observable.Merge(_inputs.Select(input => input.UpFire()));
         }
     }
 }
