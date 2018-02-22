@@ -66,6 +66,9 @@ public class CoreServicesInstaller : MonoInstaller {
 
         //special view
         Container.BindInterfacesTo<SpecialViewPresenter>().AsSingle();
+
+        //GamePresenter
+        Container.BindInterfacesAndSelfTo<GamePresenter>().AsSingle();
     }
 
     private SpaceInfo TempSpaceInfo(InjectContext context)

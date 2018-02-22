@@ -6,12 +6,12 @@ namespace Assets.Scripts.Presenters
 {
     public class GamePresenter : IInitializable
     {
-        [Inject]
+        [Inject(Id = "input_manager")]
         private IInputSubscriber _input;
 
         public void Initialize()
         {
-            _input.ExitFire().Subscribe(_ => UnityEngine.Application.Quit());
+            _input.ExitFire().Subscribe(_ => { UnityEngine.Application.Quit(); });
         }
     }
 }
